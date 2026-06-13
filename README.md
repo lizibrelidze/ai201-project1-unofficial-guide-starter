@@ -122,13 +122,18 @@ It covers Greek life at Drexel University — specifically Panhellenic sorority 
      results from an unrelated review" is an explanation. -->
 
 **Question that failed:**
+Which one is best sorority?
 
 **What the system returned:**
+According to GreekRank reviews, several reviewers say Delta Zeta (DZ) and Phi Sigma Sigma (Phi Sig) are top contenders for the best sorority at Drexel. DZ has a high rating of 4.8-5.0 TOP TIER across multiple reviews, with reviewers praising their friendly and down-to-earth nature, strong sisterhood, and involvement in philanthropy. Phi Sig also has a high rating of 4.0-5.0 TOP TIER, with reviewers praising their fun and outgoing personalities, strong sisterhood, and involvement in philanthropy.
 
 **Root cause (tied to a specific pipeline stage):**
 
-**What you would change to fix it:**
+ The expected answer mentions Phi Sig, DZ, and DPhiE. The system returned only Phi Sig. This is not a hallucination — Phi Sig does have 5.0 TOP TIER reviews in the corpus — but it is an incomplete answer. The system cannot compare all five sororities at once because retrieval only surfaces 8 chunks at a time, so whichever sorority's review chunks score highest for that specific query wins. Running the same question twice can return different sororities depending on which chunks rank in the top 8. This is a known limitation of fixed top-k retrieval for comparative questions.
 
+
+**What you would change to fix it:**
+Create a separate document for the rating isntead of depending to whichever 8 chuck rates the highest, it will give wrong answer always, also have to keep in mind that sororitites are sometimes biased.
 ---
 
 ## Spec Reflection
@@ -137,10 +142,10 @@ It covers Greek life at Drexel University — specifically Panhellenic sorority 
      Answer both questions with at least 2–3 sentences each. -->
 
 **One way the spec helped you during implementation:**
-
+The spec made it easy to prompt AI to implement the chunking function — I gave Claude the chunk size (300 tokens) and overlap (50 tokens) from the spec and it translated them directly into code without me having to explain the logic.
 **One way your implementation diverged from the spec, and why:**
 
----
+---The spec said to use local .txt files but didn't plan for a separate cleaning step. During implementation I ended up adding clean_docs.py as a whole extra stage between loading and chunking because the raw files had too much noise — cookie banners, nav menus, GreekRank UI fragments — that would have polluted the chunks.
 
 ## AI Usage
 
@@ -155,12 +160,16 @@ It covers Greek life at Drexel University — specifically Panhellenic sorority 
 
 **Instance 1**
 
-- *What I gave the AI:*
-- *What it produced:*
+- *What I gave the AI:*he 5 evaluation questions from planning.md to test the retrieval system — questions like "how many days does recruitment last" and "is it free to rush"
+- *What it produced:*Mostly "I don't have enough information to answer that" responses for the majority of questions because the retrieved chunks weren't containing the right content — the system was pulling tangentially related chunks that mentioned recruitment but not the specific facts the questions were asking for
 - *What I changed or overrode:*
+I kept adding more information as I realized it wasn't enough — the system kept saying it didn't have enough information to answer so I went back and rewrote the questions to be broader and closer to how students actually talk in the reviews and Reddit posts until it started returning real answers.
 
 **Instance 2**
 
 - *What I gave the AI:*
+I first tried to scrape the information directly from websites but I could not get it to work so I manually copied the text instead and gave it those .txt files to write the cleaning script
 - *What it produced:*
+It would give wrong information and didn't understand some things — every answer came with huge blocks of sources attached to it making the output really long and hard to read, and the introductions it wrote were bad and didn't flow naturally, they were too formal and stiff
 - *What I changed or overrode:*
+I went in and modified the introductions myself to make them shorter and sound more natural. I also trimmed down the sources it was attaching to every single answer because they were overwhelming and not all of them were even relevant.
