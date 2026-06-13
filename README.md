@@ -9,10 +9,7 @@
 
 ## Domain
 
-<!-- What topic or category of knowledge does your system cover?
-     Why is this knowledge valuable, and why is it hard to find through official channels?
-     Example: "Student reviews of CS professors at [university] — useful because official
-     course descriptions don't reflect teaching style, exam difficulty, or workload." -->
+It covers Greek life at Drexel University — specifically Panhellenic sorority recruitment.This knowledge is valuable because prospective members rely heavily on word-of-mouth, scattered Instagram posts, and Reddit threads to understand what rushing actually looks like at Drexel.Sometimes it is hard to find the information, so here all the infomations are combined  .
 
 ---
 
@@ -22,19 +19,23 @@
      Be specific: include URLs, subreddit names, forum thread titles, or file names.
      Aim for variety — sources that together cover different subtopics or perspectives. -->
 
-| # | Source | Type | URL or file path |
-|---|--------|------|-----------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-| 6 | | | |
-| 7 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
-
+| #  | Source                                      | Type                        | URL or file path                                                  |
+|----|---------------------------------------------|-----------------------------|-------------------------------------------------------------------|
+| 1  | GreekRank — Alpha Sigma Alpha at Drexel     | Student reviews             | https://greekrank.com (search: Drexel, Alpha Sigma Alpha)         |
+| 2  | GreekRank — Delta Phi Epsilon at Drexel     | Student reviews             | https://greekrank.com (search: Drexel, Delta Phi Epsilon)         |
+| 3  | GreekRank — Delta Zeta at Drexel            | Student reviews             | https://greekrank.com (search: Drexel, Delta Zeta)                |
+| 4  | GreekRank — Phi Sigma Sigma at Drexel       | Student reviews             | https://greekrank.com (search: Drexel, Phi Sigma Sigma)           |
+| 5  | Reddit r/Drexel — sorority threads          | Student forum discussion    | r/Drexel: "What Are The Sororities Like At Drexel?", "sorority qs", "Thoughts on Drexel greek life" |
+| 6  | Drexel University official Greek Life page  | Official university source  | https://drexel.edu/studentlife/get_involved/fraternity_sorority_life/ |
+| 7  | CampusDirector — Drexel PHC Fall 2026       | Official recruitment page   | documents/recruitment_2026.txt                                    |
+| 8  | Drexel Panhellenic Council sorority list    | Official PHC page           | documents/drexel_phc.txt                                          |
+| 9  | Alpha Sigma Alpha national + DragonLink     | Official org / chapter page | documents/asa_about.txt                                           |
+| 10 | Delta Phi Epsilon national + DragonLink     | Official org / chapter page | documents/dphie_about.txt                                         |
+| 11 | Delta Zeta national + DragonLink            | Official org / chapter page | documents/dz_about.txt                                            |
+| 12 | Delta Gamma national + DragonLink           | Official org / chapter page | documents/dg_about.txt                                            |
+| 13 | Phi Sigma Sigma national + DragonLink       | Official org / chapter page | documents/phisig_about.txt                                        |
+| 14 | College Confidential — Drexel sorority thread | Student forum discussion  | collegeconfidential.com: "Drexel sorority?" (2011 thread)         |
+| 15 | Wikipedia — Fraternities and sororities     | Background reference        | https://en.wikipedia.org/wiki/Fraternities_and_sororities_in_North_America |
 ---
 
 ## Chunking Strategy
@@ -46,13 +47,13 @@
      - Any preprocessing you did before chunking (e.g., stripping HTML, removing headers)
      - What your final chunk count was across all documents -->
 
-**Chunk size:**
+**Chunk size:** 300 words
 
-**Overlap:**
+**Overlap:** 50 words
 
 **Why these choices fit your documents:**
 
-**Final chunk count:**
+**Final chunk count:** 208 across 15 documents
 
 ---
 
@@ -93,11 +94,14 @@
 
 | # | Question | Expected answer | System response (summarized) | Retrieval quality | Response accuracy |
 |---|----------|-----------------|------------------------------|-------------------|-------------------|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-| 4 | | | | | |
-| 5 | | | | | |
+| 1 | How many days does Panhellenic recruitment last at Drexel?| Recruitment lasts 3 days|According to the Drexel Panhellenic recruitment schedule Fall 2026, recruitment events take place Thursday, October 1 - Saturday, October 3, with Bid Day occurring on October 4. |Relevant |Accurate |
+| 2 | What rounds does Panhellenic recruitment at Drexel consist of?|Recruitment consists of multiple rounds where PNMs visit each chapter house, getting cut down each round until preference night and bid day |According to the Drexel Panhellenic recruitment schedule Fall 2026, recruitment events take place from Thursday, October 1 to Saturday, October 3, with Bid Day occurring on October 4. The specific rounds are not explicitly listed, but according to the Drexel University official Greek Life page — Panhellenic recruitment, the rounds typically include: Orientation, Open House Round, Philanthropy Round, Preference Round, then Bid Day.
+ |Partially relevant |Accurate |
+| 3 | How many times can you rush at Drexel?|You can rush 2 times per year, once in fall and once in spring. Spring recruitment is usually easier since fewer girls participate |According to the Drexel University official Greek Life page — Panhellenic recruitment, you can rush twice per year — once during formal fall recruitment, and again during informal winter or spring recruitment.
+ |Relevant |Accurate |
+| 4 | What is considered the best sorority on campus at Drexel?|Phi Sigma Sigma and Delta Zeta are frequently mentioned as top tier, with DPhiE praised for being the nicest and most philanthropic |According to GreekRank reviewers, Phi Sigma Sigma is often considered the best sorority on campus at Drexel, with several reviewers giving them a 5.0 TOP TIER rating.
+ |Relevant |Accurate |
+| 5 | Is it free to rush a sorority at Drexel?|No, there is a $25 non-refundable registration fee to participate in Panhellenic recruitment, plus semester dues once you join a sorority |According to the Drexel University official Greek Life page, the registration fee for Panhellenic Sorority Recruitment is $25, which is non-refundable. |Relevant |Accurate |
 
 **Retrieval quality:** Relevant / Partially relevant / Off-target  
 **Response accuracy:** Accurate / Partially accurate / Inaccurate
