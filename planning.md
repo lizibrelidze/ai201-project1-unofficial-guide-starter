@@ -121,20 +121,11 @@ Document Ingestion → Chunking → Embedding + Vector Store → Retrieval → G
 [Raw .txt files]     [chunk_text()]    [all-MiniLM-L6-v2]     [cosine          [Groq API]
 Instagram captions   300 tokens /      sentence-transformers    similarity       llama3-8b
 Reddit comments      50 overlap        ChromaDB                 top-k = 5        
-Niche reviews                                                   query → 
+ Wikipedia                                                   query → 
 GreekRank reviews                                               nearest chunks
 
 ## AI Tool Plan
 
-<!-- For each part of the pipeline below, describe:
-     - Which AI tool you plan to use (Claude, Copilot, ChatGPT, etc.)
-     - What you'll give it as input (which sections of this planning.md, which requirements)
-     - What you expect it to produce
-     - How you'll verify the output matches your spec
-
-     "I'll use AI to help me code" is not a plan.
-     "I'll give Claude my Chunking Strategy section and ask it to implement chunk_text()
-     with my specified chunk size and overlap" is a plan. -->
 
 I will give Claude my Chunking Strategy section from this planning.md and
 ask it to implement ingest.py with a chunk_text() function using 300 token
@@ -142,6 +133,7 @@ chunks and 50 token overlap. I will verify the output by printing chunk
 counts per document and spot-checking that no chunk cuts off mid-sentence
 and that each chunk contains only one sorority's content where possible.
 **Milestone 3 — Ingestion and chunking:**
+
 
 **Milestone 4 — Embedding and retrieval:**
 
