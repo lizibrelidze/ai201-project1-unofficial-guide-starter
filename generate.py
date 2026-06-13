@@ -9,7 +9,8 @@ If the answer is not in the chunks, it says so explicitly.
 """
 
 import os
-from groq import Groq
+import time
+from groq import Groq, RateLimitError
 from dotenv import load_dotenv
 from retrieve import retrieve
 
@@ -76,15 +77,22 @@ def answer(question: str, k: int = TOP_K) -> dict:
     )
 
     client = Groq(api_key=os.environ["GROQ_API_KEY"])
-    response = client.chat.completions.create(
-        model=GROQ_MODEL,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user",   "content": user_message},
-        ],
-        temperature=0.0,   # deterministic — no creative fill-in
-        max_tokens=512,
-    )
+    for attempt in range(3):
+        try:
+            response = client.chat.completions.create(
+                model=GROQ_MODEL,
+                messages=[
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user",   "content": user_message},
+                ],
+                temperature=0.0,
+                max_tokens=512,
+            )
+            break
+        except RateLimitError:
+            if attempt == 2:
+                raise
+            time.sleep(30)   # wait 30 s then retry
 
     return {
         "answer":  response.choices[0].message.content.strip(),
