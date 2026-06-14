@@ -58,9 +58,10 @@ It covers Greek life at Drexel University — specifically Panhellenic sorority 
      latency, and local vs. API-hosted. -->
 
 **Model used:**
-
+Prepend meta data before embedding
+K = 5
 **Production tradeoff reflection:**
-
+It will probably not capture the real opinion, it will get only 5 opinion so not the full picture sometimes
 ---
 
 ## Grounded Generation
@@ -73,8 +74,16 @@ It covers Greek life at Drexel University — specifically Panhellenic sorority 
      the mechanism. -->
 
 **System prompt grounding instruction:**
-
+Rule 1: "Answer ONLY using information explicitly present in the CONTEXT block below."
+Rule 2: "Do NOT use any outside knowledge, training data, or general facts about sororities or Greek life."
+Rule 3: "If the context genuinely contains no relevant information at all, respond with exactly: 'I don't have enough information in my sources to answer that.'"
+Rule 4: "Never invent names, events, dates, rankings, or opinions that are not explicitly stated in the context."
 **How source attribution is surfaced in the response:**
+Grounding is enforced structurally, not just by instruction. The user message passed to the model is formatted as:
+CONTEXT:
+[1] SOURCE: GreekRank reviews — Delta Zeta at Drexel
+
+[2] SOURCE: Reddit r/Drexel — student discussions about sororities
 
 ---
 
